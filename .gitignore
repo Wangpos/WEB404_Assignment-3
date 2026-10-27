@@ -1,0 +1,8 @@
+node_modules/
+logs/*.log
+public/uploads/*
+!public/uploads/.gitkeep
+storage/secure/*
+!storage/secure/.gitkeep
+samples/payloads/
+.DS_Store

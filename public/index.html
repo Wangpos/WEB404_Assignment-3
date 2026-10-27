@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload Security Lab</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>File Upload Security Lab</h1>
+    <p>WEB404 Practical 3: malicious file uploads and how to prevent them</p>
+  </header>
+
+  <main>
+    <section class="panel vulnerable">
+      <h2>Vulnerable upload</h2>
+      <p class="hint">Checks only the client-sent Content-Type, keeps the original filename and
+        stores the file in the public web root at <code>/uploads/</code>.</p>
+      <form id="vuln-form" data-endpoint="/vulnerable/upload" data-list="/vulnerable/files">
+        <!-- Client-side "validation" only - easily bypassed -->
+        <input type="file" name="file" accept="image/*,.pdf" required>
+        <button type="submit">Upload (vulnerable)</button>
+      </form>
+      <pre class="result" id="vuln-result">No upload yet.</pre>
+      <h3>Files in /uploads/</h3>
+      <ul class="files" id="vuln-files"></ul>
+    </section>
+
+    <section class="panel secure">
+      <h2>Secure upload</h2>
+      <p class="hint">Allow-listed extensions (jpg, jpeg, png, gif, pdf), max 2 MB, MIME and magic-byte
+        checks, content scan, random filename, stored outside the web root.</p>
+      <form id="secure-form" data-endpoint="/secure/upload" data-list="/secure/files">
+        <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.pdf" required>
+        <button type="submit">Upload (secure)</button>
+      </form>
+      <pre class="result" id="secure-result">No upload yet.</pre>
+      <h3>Stored files</h3>
+      <ul class="files" id="secure-files"></ul>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
